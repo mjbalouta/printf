@@ -15,10 +15,10 @@
 
 int     ft_printf(const char *format, ...);
 
-void    ft_printstring(char *string);
+void    ft_printstring(char *string, int count_letters);
 
-void	ft_printchar(int c);
+void	ft_printchar(int c, int count_letters);
 
-void	ft_printdecimal(int a);
+void	ft_printdecimal(int a, int count_letters);
 
-void	ft_printunsigned(unsigned int a);
+void	ft_printunsigned(unsigned int a, int count_letters);

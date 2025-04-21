@@ -12,12 +12,14 @@
 
 #include "libftprintf.h"
 
-void	ft_printdecimal(int a)
+void	ft_printdecimal(int a, int count_letters)
 {
 	ft_putnbr_fd(a, 1);
+	count_letters++;
 }
 
-void	ft_printunsigned(unsigned int a)
+void	ft_printunsigned(unsigned int a, int count_letters)
 {
-		write(1, &a, 10);
+		write(1, &a, 4);
+		count_letters++;
 }

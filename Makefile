@@ -3,7 +3,7 @@ CC 			= cc
 CFLAGS		= -Wall -Wextra -Werror -I./Libft
 NAME		= libftprintf.a
 
-SRCS		= libftprintf.c ft_printstring.c
+SRCS		= libftprintf.c ft_printletters.c ft_printnumbers.c
 OBJS		= $(SRCS:.c=.o)
 LIBFT_DIR 	= ./Libft
 LIBFT 		= ./Libft/libft.a

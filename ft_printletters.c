@@ -12,11 +12,13 @@
 
 #include "libftprintf.h"
 
-void    ft_printstring(char *str)
+void    ft_printstring(char *str, int count_letters)
 {
     ft_putstr_fd(str, 1);
+	count_letters++;
 }
-void	ft_printchar(int c)
+void	ft_printchar(int c, int count_letters)
 {
 	write(1, &c, 1);
+	count_letters++;
 }
