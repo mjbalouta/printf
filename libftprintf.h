@@ -20,3 +20,5 @@ void    ft_printstring(char *string);
 void	ft_printchar(int c);
 
 void	ft_printdecimal(int a);
+
+void	ft_printunsigned(unsigned int a);

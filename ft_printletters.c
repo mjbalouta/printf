@@ -18,5 +18,5 @@ void    ft_printstring(char *str)
 }
 void	ft_printchar(int c)
 {
-	ft_putnbr_fd(c, 1);
+	write(1, &c, 1);
 }

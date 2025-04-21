@@ -16,3 +16,8 @@ void	ft_printdecimal(int a)
 {
 	ft_putnbr_fd(a, 1);
 }
+
+void	ft_printunsigned(unsigned int a)
+{
+		write(1, &a, 10);
+}
