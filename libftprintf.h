@@ -13,16 +13,18 @@
 #include "./Libft/libft.h"
 #include <stdarg.h>
 
-int	ft_printf(const char *format, ...);
+int		ft_printf(const char *format, ...);
 
-int	ft_printstring(char *string, int count_letters);
+int		ft_printstring(char *string, int count_letters);
 
-int	ft_printchar(int c, int count_letters);
+int		ft_printchar(int c, int count_letters);
 
-int	ft_printdecimal(int num, int count_letters);
+int		ft_printdecimal(int num, int count_letters);
 
-int	ft_printunsigned(unsigned int a, int count_letters);
+int		ft_printunsigned(int a, int count_letters);
 
-int	ft_printhexa(long num, int count_letters, int lowcase);
+int		ft_printhexa(unsigned int num, int count_letters, int lowcase);
 
-int	ft_printaddress(void *p, int count_letters);
+int		ft_printaddress(void *p, int count_letters);
+
+char	*ft_uitoa(unsigned int num, int size);

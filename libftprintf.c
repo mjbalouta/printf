@@ -15,46 +15,46 @@
 #include <stdio.h>
 #include <limits.h>
 
-//COUNT_LETTERS ESTÁ ERRADO
+
+static	int	ft_check_format(va_list args, int count_letters, const char *format, int i)
+{
+	if (format[i] == 'c')
+		count_letters = ft_printchar(va_arg(args, int), count_letters);
+	else if (format[i] == 's')
+		count_letters = ft_printstring(va_arg(args, char *), count_letters);
+	else if (format[i] == 'p')
+		count_letters = ft_printaddress(va_arg(args, void *), count_letters);
+	else if (format[i] == 'd' || format[i] == 'i')
+		count_letters = ft_printdecimal(va_arg(args, int), count_letters);
+	else if (format[i] == 'u')
+		count_letters = ft_printunsigned(va_arg(args, int), count_letters);
+	else if (format[i] == 'x')
+		count_letters = ft_printhexa(va_arg(args, unsigned int), count_letters, 1);
+	else if (format[i] == 'X')
+		count_letters = ft_printhexa(va_arg(args, unsigned int), count_letters, 0);
+	else if (format[i] == '%')
+	{
+		count_letters++;
+		write (1, "%", 1);
+	}
+	return (count_letters);
+}
 
 int	ft_printf(const char *format, ...)
 {
-	va_list args;
+	va_list	args;
 	int		i;
 	int		count_letters;
-	int		lowcase;
 
 	va_start(args, format);
 	i = 0;
 	count_letters = 0;
 	while (format[i])
 	{
-		lowcase = 0;
 		if (format[i] == '%')
 		{
 			i++;
-			if (format[i] == 'c')
-				count_letters = ft_printchar(va_arg(args, int), count_letters);
-			else if (format[i] == 's')
-				count_letters = ft_printstring(va_arg(args, char *), count_letters);
-			else if (format[i] == 'p')
-				count_letters = ft_printaddress(va_arg(args, void *), count_letters);
-			else if (format[i] == 'd' || format[i] == 'i')
-				count_letters = ft_printdecimal(va_arg(args, int), count_letters);
-			else if (format[i] == 'u')
-				count_letters = ft_printunsigned(va_arg(args, unsigned int), count_letters);
-			else if (format[i] == 'x')
-			{
-				lowcase = 1;
-				count_letters = ft_printhexa(va_arg(args, long), count_letters, lowcase);
-			}
-			else if (format[i] == 'X')
-				count_letters = ft_printhexa(va_arg(args, long), count_letters, lowcase);
-			else if (format[i] == '%')
-			{
-				count_letters++;
-				write (1, "%", 1);
-			}
+			count_letters = ft_check_format(args, count_letters, format, i);
 		}
 		else
 		{
@@ -73,7 +73,7 @@ int main(void)
 	char c = 'c';
 	int	a = INT_MIN;
 	int b = INT_MAX;
-	int e = -5;
+	int e = -10;
 	int f = 5;
 	unsigned int d = 26;
 	int	result;
@@ -127,14 +127,39 @@ int main(void)
 	
 	printf("\n%% TEST:\n");
 	result = ft_printf("c: %s\n", str);
-	printf("o: %s\n", str);
+	original = printf("o: %s\n", str);
 	printf("printed %d characters.\n", result);
 	printf("printed %d characters.\n", original);
 
 	printf("\n%%p TEST:\n");
 	result = ft_printf("c: %p\n", ptr);
-	printf("o: %p\n", ptr);
+	original = printf("o: %p\n", ptr);
 	printf("printed %d characters.\n", result);
 	printf("printed %d characters.\n", original);
 
+	printf("\nERRORS TEST:\n");
+	printf("Printing an %%i in %%s format:");
+	ft_printf("%s\n", f);
+
 }
+
+/* int	main()
+{
+	char c = 'k'; // %c
+	char *str = "String test"; // %s
+	char *var; var = &c;// %p
+	int	nbr = -5;// %d // %i
+	unsigned int nbrr = 20;// %u
+	int b= 0xffffffff;// %x // %X
+	// %%
+
+	int i;
+	printf("Printf replica:\n");
+	i = ft_printf("| TEST TEXT |\n| Single Char: %c |\n| String: %s |\n| Pointer Adress: %p |\n| Decimal: %d |\n| Integer %i |\n| Unsign deci: %u |\n| HexLower: %x |\n| HexUpper: %X |\n| Percentage sign: %% |\n", c, str, var, nbr, nbr, nbrr, b, b);
+	printf("\nReturn Value: %d", i);
+	///////////////////////////////
+	printf("\nPrintf original:\n");
+	i = printf("| TEST TEXT |\n| Single Char: %c |\n| String: %s |\n| Pointer Adress: %p |\n| Decimal: %d |\n| Integer %i |\n| Unsign deci: %u |\n| HexLower: %x |\n| HexUpper: %X |\n| Percentage sign: %% |\n", c, str, var, nbr, nbr, nbrr, b, b);
+	printf("\nReturn Value: %d", i);
+	return (0);
+} */
