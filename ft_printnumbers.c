@@ -12,38 +12,37 @@
 
 #include "libftprintf.h"
 
-int	ft_printdecimal(long num, int count_letters)
+int	ft_printdecimal(int num, int count_letters)
 {
-	char	array[10];
+	char	*ptr;
 	int		i;
- 
+
+	ptr = ft_itoa(num);
 	i = 0;
-	if (num < 0)
+	while (ptr[i])
 	{
-		num = -num;
-		write(1, "-", 1);
-		count_letters++;
-	}
-	if (num == 0)
-		write (1, "0", 1);
-	while (num > 0)
-	{
-		array[i] = (num % 10) + '0';
+		write (1, &ptr[i], 1);
 		i++;
-		num = num / 10;
 	}
-	while (--i >= 0)
-	{
-		write (1, &array[i], 1);
-		count_letters++;
-	}
+	count_letters += i;
 	return (count_letters);
 }
 
 int	ft_printunsigned(unsigned int a, int count_letters)
 {
-		write(1, &a, 4);
-		return (count_letters++);
+	char	*ptr;
+	int		i;
+	
+	//DOESN'T HANDLE NEGATIVE NUMBERS
+	i = 0;
+	ptr = ft_itoa(a);
+	while (ptr[i])
+	{
+		write (1, &ptr[i], 1);
+		i++;
+	}
+	count_letters += i;
+	return (count_letters);
 }
 
 int	ft_printhexa(long num, int count_letters, int lowcase)
@@ -78,9 +77,9 @@ int	ft_printhexa(long num, int count_letters, int lowcase)
 int	ft_printaddress(void *p, int count_letters)
 {
 	long i;
-	
+	//COUNT LETTERS ???
 	i = (long)p;
 	write (1, "0x", 2);
-	count_letters = count_letters + 2;
-	return (ft_printhexa(i, count_letters, 1));
+	count_letters = (ft_printhexa(i, count_letters, 1)) / 2;
+	return (count_letters);
 }

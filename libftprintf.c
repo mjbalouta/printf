@@ -40,7 +40,7 @@ int	ft_printf(const char *format, ...)
 			else if (format[i] == 'p')
 				count_letters = ft_printaddress(va_arg(args, void *), count_letters);
 			else if (format[i] == 'd' || format[i] == 'i')
-				count_letters = ft_printdecimal(va_arg(args, long), count_letters);
+				count_letters = ft_printdecimal(va_arg(args, int), count_letters);
 			else if (format[i] == 'u')
 				count_letters = ft_printunsigned(va_arg(args, unsigned int), count_letters);
 			else if (format[i] == 'x')
@@ -74,11 +74,12 @@ int main(void)
 	int	a = INT_MIN;
 	int b = INT_MAX;
 	int e = -5;
+	int f = 5;
 	unsigned int d = 26;
 	int	result;
 	int original;
 	char str[] = "a %%maria";
-	int *ptr = &a;
+	int *ptr = &f;
 	
 	printf("%%s TEST:\n");
 	result = ft_printf("c: a %s estuda\n", string);

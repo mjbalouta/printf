@@ -28,6 +28,7 @@ int    ft_printstring(char *str, int count_letters)
 int	ft_printchar(int c, int count_letters)
 {
 	write(1, &c, 1);
-	return (count_letters++);
+	count_letters++;
+	return (count_letters);
 }
 

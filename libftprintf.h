@@ -19,7 +19,7 @@ int	ft_printstring(char *string, int count_letters);
 
 int	ft_printchar(int c, int count_letters);
 
-int	ft_printdecimal(long a, int count_letters);
+int	ft_printdecimal(int num, int count_letters);
 
 int	ft_printunsigned(unsigned int a, int count_letters);
 
