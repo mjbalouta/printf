@@ -21,7 +21,7 @@ int		ft_printchar(int c, int count_letters);
 
 int		ft_printdecimal(int num, int count_letters);
 
-int		ft_printunsigned(int a, int count_letters);
+int		ft_printunsigned(unsigned int a, int count_letters);
 
 int		ft_printhexa(unsigned int num, int count_letters, int lowcase);
 

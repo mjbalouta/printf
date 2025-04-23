@@ -17,10 +17,11 @@ int    ft_printstring(char *str, int count_letters)
 	int	i;
 
 	i = 0;
-	/* if (!str)
+	if (!str)
 	{
-		return (write (1, "(null)", 6));
-	} */
+		write (1, "(null)", 6);
+		return (count_letters + 6);
+	}
     while (str[i])
 	{
 		write (1, &str[i], 1);
@@ -32,7 +33,6 @@ int    ft_printstring(char *str, int count_letters)
 int	ft_printchar(int c, int count_letters)
 {
 	write(1, &c, 1);
-	count_letters++;
-	return (count_letters);
+	return (count_letters + 1);
 }
 

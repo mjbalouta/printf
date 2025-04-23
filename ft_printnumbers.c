@@ -24,6 +24,7 @@ int	ft_printdecimal(int num, int count_letters)
 		write (1, &ptr[i], 1);
 		i++;
 	}
+	free(ptr);
 	count_letters += i;
 	return (count_letters);
 }
@@ -49,7 +50,7 @@ char	*ft_uitoa(unsigned int num, int size)
 	return (ptr);
 }
 
-int	ft_printunsigned(int a, int count_letters)
+int	ft_printunsigned(unsigned int a, int count_letters)
 {
 	char			*ptr;
 	int				count;
@@ -75,6 +76,7 @@ int	ft_printunsigned(int a, int count_letters)
 		write (1, &ptr[count--], 1);
 		count_letters++;
 	}
+	free(ptr);
 	return (count_letters - 1);
 }
 
@@ -113,6 +115,11 @@ int	ft_printaddress(void *p, int count_letters)
 	char	array[16];
 	int		i;
 
+	if (p == NULL)
+	{
+		write(1, "(nil)", 5);
+		return (count_letters + 5);
+	}
 	num = (unsigned long)p;
 	i = 0;
 	write (1, "0x", 2);
