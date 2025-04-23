@@ -11,31 +11,29 @@
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include <limits.h>
-#include <stdio.h>
 
-static	int	ft_check_format(va_list args, int count_letters, const char *format, int i)
+static	int	ft_check_format(va_list args, int count, const char *format, int i)
 {
 	if (format[i] == 'c')
-		count_letters = ft_printchar(va_arg(args, int), count_letters);
+		count = ft_printchar(va_arg(args, int), count);
 	else if (format[i] == 's')
-		count_letters = ft_printstring(va_arg(args, char *), count_letters);
+		count = ft_printstring(va_arg(args, char *), count);
 	else if (format[i] == 'p')
-		count_letters = ft_printaddress(va_arg(args, void *), count_letters);
+		count = ft_printaddress(va_arg(args, void *), count);
 	else if (format[i] == 'd' || format[i] == 'i')
-		count_letters = ft_printdecimal(va_arg(args, int), count_letters);
+		count = ft_printdecimal(va_arg(args, int), count);
 	else if (format[i] == 'u')
-		count_letters = ft_printunsigned(va_arg(args, unsigned int), count_letters);
+		count = ft_printunsigned(va_arg(args, unsigned int), count);
 	else if (format[i] == 'x')
-		count_letters = ft_printhexa(va_arg(args, unsigned int), count_letters, 1);
+		count = ft_printhexa(va_arg(args, unsigned int), count, 1);
 	else if (format[i] == 'X')
-		count_letters = ft_printhexa(va_arg(args, unsigned int), count_letters, 0);
+		count = ft_printhexa(va_arg(args, unsigned int), count, 0);
 	else if (format[i] == '%')
 	{
-		count_letters++;
+		count++;
 		write (1, "%", 1);
 	}
-	return (count_letters);
+	return (count);
 }
 
 int	ft_printf(const char *format, ...)
@@ -65,94 +63,65 @@ int	ft_printf(const char *format, ...)
 	return (count_letters);
 }
 
-// int main(void)
-// {
-// 	char string[] = "maria joao";
-// 	char c = 'c';
-// 	int	a = INT_MIN;
-// 	int b = INT_MAX;
-// 	int e = -10;
-// 	int f = 5;
-// 	unsigned int d = 26;
-// 	int	result;
-// 	int original;
-// 	char str[] = "a %%maria";
-// 	int *ptr = &f;
-	
-// 	printf("%%s TEST:\n");
-// 	result = ft_printf("c: a %s estuda\n", a);
-// 	original = printf("o: a %s estuda\n", a);
-// 	printf("printed %d characters.\n", result);
-// 	printf("printed %d characters.\n", original);
-	
-// 	printf("\n%%c TEST:\n");
-// 	result = ft_printf("c: %c e %i\n", c, b);
-// 	original = printf("o: %c e %i\n", c, b);
-// 	printf("printed %d characters.\n", result);
-// 	printf("printed %d characters.\n", original);
-	
-// 	printf("\n%%d TEST:\n");
-// 	result = ft_printf("c: %d\n", a);
-// 	original = printf("o: %d\n", a);
-// 	printf("printed %d characters.\n", result);
-// 	printf("printed %d characters.\n", original);
-	
-// 	printf("\n%%i TEST:\n");
-// 	result = ft_printf("c: %i\n", b);
-// 	original = printf("o: %i\n", b);
-// 	printf("printed %d characters.\n", result);
-// 	printf("printed %d characters.\n", original);
-
-// 	printf("\n%%u TEST:\n");
-// 	result = ft_printf("c: %u\n", e);
-// 	original = printf("o: %u\n", e);
-// 	printf("printed %d characters.\n", result);
-// 	printf("printed %d characters.\n", original);
-// 	result = ft_printf("c: %u\n", d);
-// 	original = printf("o: %u\n", d);
-// 	printf("printed %d characters.\n", result);
-// 	printf("printed %d characters.\n", original);
-
-// 	printf("\n%%X AND %%x TEST:\n");
-// 	result = ft_printf("c: %x\n", d);
-// 	original = printf("o: %x\n", d);
-// 	printf("printed %d characters.\n", result);
-// 	printf("printed %d characters.\n", original);
-// 	result = ft_printf("c: %X\n", d);
-// 	original = printf("o: %X\n", d);
-// 	printf("printed %d characters.\n", result);
-// 	printf("printed %d characters.\n", original);
-	
-// 	printf("\n%% TEST:\n");
-// 	result = ft_printf("c: %s\n", str);
-// 	original = printf("o: %s\n", str);
-// 	printf("printed %d characters.\n", result);
-// 	printf("printed %d characters.\n", original);
-
-// 	printf("\n%%p TEST:\n");
-// 	result = ft_printf("c: %p\n", ptr);
-// 	original = printf("o: %p\n", ptr);
-// 	printf("printed %d characters.\n", result);
-// 	printf("printed %d characters.\n", original);
-// }
-
-int	main()
+int main(void)
 {
-	char c = 'k'; // %c
-	char *str = "String test"; // %s
-	char *var; var = &c;// %p
-	int	nbr = -5;// %d // %i
-	unsigned int nbrr = 20;// %u
-	int b= 0xffffffff;// %x // %X
-	// %%
-
-	int i;
-	printf("Printf replica:\n");
-	i = ft_printf("| TEST TEXT |\n| Single Char: %c |\n| String: %s |\n| Pointer Adress: %p |\n| Decimal: %d |\n| Integer %i |\n| Unsign deci: %u |\n| HexLower: %x |\n| HexUpper: %X |\n| Percentage sign: %% |\n", c, str, var, nbr, nbr, nbrr, b, b);
-	printf("\nReturn Value: %d", i);
-	///////////////////////////////
-	printf("\nPrintf original:\n");
-	i = printf("| TEST TEXT |\n| Single Char: %c |\n| String: %s |\n| Pointer Adress: %p |\n| Decimal: %d |\n| Integer %i |\n| Unsign deci: %u |\n| HexLower: %x |\n| HexUpper: %X |\n| Percentage sign: %% |\n", c, str, var, nbr, nbr, nbrr, b, b);
-	printf("\nReturn Value: %d", i);
-	return (0);
+	char string[] = "maria joao";
+	char c = 'c';
+	int	a = INT_MIN;
+	int b = INT_MAX;
+	int e = -10;
+	int f = 5;
+	unsigned int d = 0;
+	int	result;
+	int original;
+	char str[] = "a %%maria";
+	int *ptr = &f;
+	printf("%%s TEST:\n");
+	result = ft_printf("c: a %s estuda\n", string);
+	original = printf("o: a %s estuda\n", string);
+	printf("printed %d characters.\n", result);
+	printf("printed %d characters.\n", original);
+	printf("\n%%c TEST:\n");
+	result = ft_printf("c: %c e %i\n", c, b);
+	original = printf("o: %c e %i\n", c, b);
+	printf("printed %d characters.\n", result);
+	printf("printed %d characters.\n", original);
+	printf("\n%%d TEST:\n");
+	result = ft_printf("c: %d\n", a);
+	original = printf("o: %d\n", a);
+	printf("printed %d characters.\n", result);
+	printf("printed %d characters.\n", original);
+	printf("\n%%i TEST:\n");
+	result = ft_printf("c: %i\n", b);
+	original = printf("o: %i\n", b);
+	printf("printed %d characters.\n", result);
+	printf("printed %d characters.\n", original);
+	printf("\n%%u TEST:\n");
+	result = ft_printf("c: %u\n", e);
+	original = printf("o: %u\n", e);
+	printf("printed %d characters.\n", result);
+	printf("printed %d characters.\n", original);
+	result = ft_printf("c: %u\n", d);
+	original = printf("o: %u\n", d);
+	printf("printed %d characters.\n", result);
+	printf("printed %d characters.\n", original);
+	printf("\n%%X AND %%x TEST:\n");
+	result = ft_printf("c: %x\n", e);
+	original = printf("o: %x\n", e);
+	printf("printed %d characters.\n", result);
+	printf("printed %d characters.\n", original);
+	result = ft_printf("c: %X\n", e);
+	original = printf("o: %X\n", e);
+	printf("printed %d characters.\n", result);
+	printf("printed %d characters.\n", original);
+	printf("\n%% TEST:\n");
+	result = ft_printf("c: %s\n", str);
+	original = printf("o: %s\n", str);
+	printf("printed %d characters.\n", result);
+	printf("printed %d characters.\n", original);
+	printf("\n%%p TEST:\n");
+	result = ft_printf("c: %p\n", ptr);
+	original = printf("o: %p\n", ptr);
+	printf("printed %d characters.\n", result);
+	printf("printed %d characters.\n", original);
 }

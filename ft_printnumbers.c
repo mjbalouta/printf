@@ -33,7 +33,7 @@ char	*ft_uitoa(unsigned int num, int size)
 {
 	char	*ptr;
 	int		i;
-	
+
 	i = 0;
 	ptr = ft_calloc(size + 1, sizeof(char));
 	if (!ptr)
@@ -55,12 +55,14 @@ int	ft_printunsigned(unsigned int a, int count_letters)
 	char			*ptr;
 	int				count;
 	unsigned int	num;
-	
+
 	count = 0;
-	num = (unsigned int)a;
+	num = a;
 	if (num == 0)
-		count = 1;
-	else 
+	{
+		count += write (1, "0", 1);
+	}
+	else
 	{
 		while (num > 0)
 		{
@@ -68,14 +70,11 @@ int	ft_printunsigned(unsigned int a, int count_letters)
 			count++;
 		}
 	}
-	ptr = ft_uitoa((unsigned int)a, count);
+	ptr = ft_uitoa(a, count);
 	if (!ptr)
 		return (count_letters);
 	while (count >= 0)
-	{
-		write (1, &ptr[count--], 1);
-		count_letters++;
-	}
+		count_letters += write (1, &ptr[count--], 1);
 	free(ptr);
 	return (count_letters - 1);
 }
@@ -111,9 +110,9 @@ int	ft_printhexa(unsigned int num, int count_letters, int lowcase)
 int	ft_printaddress(void *p, int count_letters)
 {
 	unsigned long	num;
-	char	*base;
-	char	array[16];
-	int		i;
+	char			*base;
+	char			array[16];
+	int				i;
 
 	if (p == NULL)
 	{
@@ -125,18 +124,12 @@ int	ft_printaddress(void *p, int count_letters)
 	write (1, "0x", 2);
 	count_letters += 2;
 	base = "0123456789abcdef";
-	if ( num == 0)
-	{
-		write (1, "0", 1);
-		return (count_letters + 1);
-	}
 	while (num > 0)
 	{
 		array[i++] = base[num % 16];
-		count_letters++;
 		num = num / 16;
 	}
 	while (--i >= 0)
-		write (1, &array[i], 1);
+		count_letters += write (1, &array[i], 1);
 	return (count_letters);
 }
