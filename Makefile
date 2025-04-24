@@ -1,6 +1,6 @@
 
 CC 			= cc
-CFLAGS		= -Wall -Wextra -Werror -I./Libft
+CFLAGS		= -Wall -Wextra -Werror -I./Libft -g
 NAME		= libftprintf.a
 
 SRCS		= libftprintf.c ft_printletters.c ft_printnumbers.c
@@ -8,7 +8,7 @@ OBJS		= $(SRCS:.c=.o)
 LIBFT_DIR 	= ./Libft
 LIBFT 		= ./Libft/libft.a
 
-all: $(NAME)
+all: $(NAME) 
 
 $(NAME): $(LIBFT) $(OBJS)
 	@@echo "Compiling all files..."
@@ -25,7 +25,7 @@ $(LIBFT): $(LIBFT_SRC)
 	@$(MAKE) -C $(LIBFT_DIR) > /dev/null
 
 %.o: %.c libftprintf.h
-	@$(CC) $(CFLAGS) -c $< -o $@ 
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@@echo "Removing objects..."
@@ -38,6 +38,6 @@ fclean: clean
 	@$(MAKE) fclean -C $(LIBFT_DIR) > /dev/null
 	@rm -f $(NAME)
 
-re: fclean $(NAME)
+re: fclean $(NAME) all
 
 .PHONY: all clean fclean re

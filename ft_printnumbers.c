@@ -10,14 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	ft_printdecimal(int num, int count_letters)
 {
 	char	*ptr;
 	int		i;
 
+	//printf("HALOOOOOOOOOOO>>>>>>>>%d\n", num);
+	//ptr = NULL;
 	ptr = ft_itoa(num);
+	//i = ft_strlen(ptr);
 	i = 0;
 	while (ptr[i])
 	{
