@@ -72,8 +72,8 @@ int	ft_printf(const char *format, ...)
 // 	int e = -10;
 // 	int f = 5;
 // 	unsigned int d = 0;
- 	//int	result;
- 	//int original;
+//int	result;
+//int original;
 // 	char str[] = "a %%maria";
 // 	int *ptr = &f;
 // 	printf("%%s TEST:\n");
@@ -90,13 +90,13 @@ int	ft_printf(const char *format, ...)
 	//result = ft_printf("c: %d\n", -1);
 	//original = printf("o: %d\n", -1);
 	//printf("printed %d characters.\n", result);
- 	//printf("printed %d characters.\n", original);
+//printf("printed %d characters.\n", original);
 // 	printf("\n%%i TEST:\n");
 // 	result = ft_printf("c: %i\n", b);
 // 	original = printf("o: %i\n", b);
 // 	printf("printed %d characters.\n", result);
 // 	printf("printed %d characters.\n", original);
- 	/* printf("\n%%u TEST:\n");
+/* printf("\n%%u TEST:\n");
  	result = ft_printf("c: %u\n", 0);
  	original = printf("o: %u\n", 0);
  	printf("printed %d characters.\n", result);
