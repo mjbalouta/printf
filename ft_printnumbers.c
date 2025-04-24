@@ -17,10 +17,7 @@ int	ft_printdecimal(int num, int count_letters)
 	char	*ptr;
 	int		i;
 
-	//printf("HALOOOOOOOOOOO>>>>>>>>%d\n", num);
-	//ptr = NULL;
 	ptr = ft_itoa(num);
-	//i = ft_strlen(ptr);
 	i = 0;
 	while (ptr[i])
 	{
@@ -35,21 +32,19 @@ int	ft_printdecimal(int num, int count_letters)
 char	*ft_uitoa(unsigned int num, int size)
 {
 	char	*ptr;
-	int		i;
 
-	i = 0;
 	ptr = ft_calloc(size + 1, sizeof(char));
 	if (!ptr)
 		return (NULL);
 	if (num == 0)
 		ptr[0] = '0';
+	ptr[size] = '\0';
 	while (num > 0)
 	{
-		ptr[i] = (num % 10) + '0';
-		i++;
+		ptr[size - 1] = (num % 10) + '0';
+		size--;
 		num = num / 10;
 	}
-	ptr[i] = '\0';
 	return (ptr);
 }
 
@@ -58,13 +53,13 @@ int	ft_printunsigned(unsigned int a, int count_letters)
 	char			*ptr;
 	int				count;
 	unsigned int	num;
+	int				i;
 
 	count = 0;
 	num = a;
+	i = 0;
 	if (num == 0)
-	{
-		count += write (1, "0", 1);
-	}
+		return (count_letters += write (1, "0", 1));
 	else
 	{
 		while (num > 0)
@@ -76,10 +71,10 @@ int	ft_printunsigned(unsigned int a, int count_letters)
 	ptr = ft_uitoa(a, count);
 	if (!ptr)
 		return (count_letters);
-	while (count >= 0)
-		count_letters += write (1, &ptr[count--], 1);
+	while (i < count)
+		count_letters += write (1, &ptr[i++], 1);
 	free(ptr);
-	return (count_letters - 1);
+	return (count_letters);
 }
 
 int	ft_printhexa(unsigned int num, int count_letters, int lowcase)

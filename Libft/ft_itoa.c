@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 13:49:56 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/04/17 11:32:51 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/04/24 20:52:38 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,17 @@ argument. Negative numbers must be handled.
 
 static char	*ft_putnbr(long num, char *str, int nr_digits, int is_negative)
 {
-	int	last;
-
-	last = nr_digits + 1;
-	if (is_negative != 1)
-		nr_digits = nr_digits - 1;
-	while (num > 0 && nr_digits >= 0)
+	if (is_negative)
 	{
-		str[nr_digits] = (num % 10) + '0';
+		str[0] = '-';
+	}
+	str[is_negative + nr_digits] = '\0';
+	while (num > 0 && nr_digits > 0)
+	{
+		str[is_negative + nr_digits - 1] = (num % 10) + '0';
 		num = num / 10;
 		nr_digits--;
 	}
-	if (is_negative == 1)
-		str[nr_digits] = '-';
-	str[last] = '\0';
 	return (str);
 }
 
@@ -86,12 +83,12 @@ char	*ft_itoa(int n)
 	return (str);
 }
 
-// int	main(void)
-// {
-// 	int num = -9874;
-// 	char *res;
-// 	res = ft_itoa(num);
-// 	printf("%s\n", res);
-// 	free(res);
-// 	return (0);
-// }
+/* int	main(void)
+{
+	int num = -1;
+ 	char *res;
+	res = ft_itoa(num);
+ 	printf("%s\n", res);
+ 	free(res);
+ 	return (0);
+} */
